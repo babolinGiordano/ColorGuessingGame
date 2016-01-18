@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+   <meta name="author" content="Joel Sequeira">
+   <title>Color Guessing Game</title>
+   <script>
+      var colors_list = ["cyan", "blue", "magenta",
+      "gray", "green", "gold",
+      "orange", "white", "red",
+      "pink", "silver", "yellow",
+      "tomato", "violet", "navy"];
+      var target;
+      var target_index;
+      var guess_input_text;
+      var guess_input;
+      var finished = false;
+      var guesses = 0;
+
+      function do_game() {
+         //sort the colors list in alphabetical order
+         colors_list.sort();
+
+         //pick a random color from the sorted list of colors
+         var random_number = Math.random() * colors_list.length;
+         var random_number_integer = Math.floor(random_number);
+         target_index = random_number_integer;
+         target = colors_list[target_index];
+
+         console.log("list:\n\n" + colors_list + "\n\n"
+         + "target:\n\n" + target);
+         //display the target (to help with debugging and marking)
+         alert("to help with debugging and marking, target = " + target);
+
+         while (!finished) {
+            guess_input_text = prompt("I am thinking of one of these color:\n\n "
+            + colors_list.join(", ") +"\n\n What color am I thinking of?");
+            guess_input = String(guess_input_text);
+            console.log("input:\n\n" + guess_input + "\n\n");
+            guesses += 1;
+            if ((guess_input == target)) {
+               myBody = document.getElementsByTagName("body")[0];
+               myBody.style.background = target;
+               alert ( "Congratulations! You have guessed the color!\n\n"
+               + "It took you " + guesses + " guesses to finish the game!");
+               finished = true;
+            }
+
+         }
+      }
+   </script>
+</head>
+<body onload="do_game()">
+
+</body>
+</html>
